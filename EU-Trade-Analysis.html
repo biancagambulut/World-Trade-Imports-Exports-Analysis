@@ -1,163 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>EU Trade Analysis – Power BI Dashboard</title>
+  <meta charset="UTF-8" />
+  <title>Power BI – EU Trade Analysis</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
 
-<style>
-  body {
-    font-family: "Poppins", sans-serif;
-    margin: 0;
-    padding: 0;
-    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-    color: #fff;
-    text-align: center;
-  }
+  <style>
+    *{box-sizing:border-box;scroll-behavior:smooth;}
 
-  .container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 40px 20px;
-  }
+    body{
+      font-family:"Poppins",sans-serif;
+      margin:0;
+      padding:0;
+      display:flex;
+      justify-content:center;
+      background:linear-gradient(135deg,#0f0c29,#302b63,#24243e);
+      color:#fff;
+    }
 
-  h1 {
-    font-size: 38px;
-    margin-bottom: 10px;
-  }
+    .container{
+      width:90%;
+      max-width:950px;
+      margin:50px auto;
+    }
 
-  .btn-home {
-    display: inline-block;
-    background: #00b4d8;
-    padding: 10px 20px;
-    text-decoration: none;
-    color: #fff;
-    border-radius: 8px;
-    margin-bottom: 25px;
-    font-weight: 500;
-    transition: .3s;
-  }
-  .btn-home:hover { background:#0096c7; }
+    h2{
+      text-align:center;
+      font-size:40px;
+      margin-bottom:20px;
+      font-weight:600;
+    }
 
-  .section {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.15);
-    padding: 25px;
-    border-radius: 15px;
-    margin-top: 28px;
-    text-align: left;
-  }
+    .intro{
+      text-align:center;
+      max-width:750px;
+      margin:15px auto 40px auto;
+      color:#ddd;
+      font-size:18px;
+      line-height:1.6;
+    }
 
-  .screenshots {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    flex-wrap: wrap;
-    margin-top: 20px;
-  }
-  .screenshots img {
-    width: 230px;
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.3);
-    transition: .3s;
-  }
-  .screenshots img:hover {
-    transform: translateY(-4px) scale(1.04);
-    box-shadow: 0 0 15px rgba(0,255,255,0.4);
-  }
+    .home-btn{
+      background:#6a00ff;
+      padding:14px 30px;
+      border-radius:8px;
+      text-decoration:none;
+      color:#fff;
+      font-weight:600;
+      transition:.3s;
+      box-shadow:0 0 10px rgba(106,0,255,0.5);
+    }
 
-  .img-title {
-    text-align: center;
-    margin: 10px 0 25px;
-    font-size: 16px;
-    opacity: 0.9;
-  }
+    .home-btn:hover{
+      background:#8b2bff;
+      box-shadow:0 0 15px #8b2bff;
+      transform:scale(1.05);
+    }
 
-  ul {
-    line-height: 1.6;
-  }
+    .project-block h3{
+      text-align:center;
+      margin-top:60px;
+      font-size:26px;
+      font-weight:600;
+      letter-spacing:0.5px;
+      color:#e4d9ff;
+      text-shadow:0 0 8px rgba(150,150,255,0.35);
+    }
 
-</style>
+    .proj-img{
+      width:70%;
+      max-width:650px;
+      display:block;
+      margin:15px auto;
+      border-radius:10px;
+      cursor:pointer;
+      transition:transform .3s;
+      opacity:0;
+      animation:fade 1s ease forwards;
+    }
+
+    .proj-img:hover{
+      transform:scale(1.05);
+      filter:drop-shadow(0 0 12px rgba(0,225,255,.6));
+    }
+
+    .caption{
+      text-align:center;
+      max-width:700px;
+      margin:10px auto 30px auto;
+      color:#ccc;
+      font-size:16px;
+      opacity:.9;
+    }
+
+    @keyframes fade{
+      from{opacity:0;transform:translateY(20px);}
+      to{opacity:1;transform:translateY(0);}
+    }
+
+    #modal{
+      display:none;
+      position:fixed;
+      top:0;left:0;
+      width:100%;height:100%;
+      background:rgba(0,0,0,.8);
+      justify-content:center;
+      align-items:center;
+      z-index:9999;
+    }
+
+    #modal img{
+      max-width:90%;
+      max-height:90%;
+      border-radius:10px;
+    }
+
+    .learn-box{
+      margin-top:60px;
+      background:rgba(255,255,255,0.08);
+      padding:25px;
+      border-radius:15px;
+      backdrop-filter:blur(8px);
+      border:1px solid rgba(255,255,255,0.18);
+    }
+
+    .learn-box h3{
+      text-align:center;
+      margin-bottom:15px;
+      font-size:26px;
+      color:#e4d9ff;
+    }
+
+    .learn-box ul{
+      line-height:1.8;
+      font-size:16px;
+      color:#ddd;
+    }
+
+    @media(max-width:768px){
+      .proj-img{width:95%;}
+      .intro{font-size:16px;}
+    }
+  </style>
 </head>
 
 <body>
 
 <div class="container">
 
-  <h1>📊 EU Trade Analysis – Power BI Dashboard</h1>
+  <h2>📊 Power BI – EU Trade Analysis</h2>
 
-  <a href="index.html" class="btn-home">🏡 Home</a>
+  <div style="text-align:center;margin-bottom:35px;">
+    <a class="home-btn" href="https://biancagambulut.github.io/biancagambulut.github.io/">🏠 Home</a>
+  </div>
 
-  <!-- PROJECT DESCRIPTION -->
-  <div class="section">
-    <h2>📌 Project Overview</h2>
-    <p>
-      This dashboard analyzes the evolution of imports and exports within the European Union, highlighting trade trends,
-      partner countries and growth dynamics. The goal of the report is to understand the trade flows between EU and
-      non-EU countries, and identify key trade indicators and insights.
+ <p class="intro">
+  This dashboard analyzes the evolution of imports and exports within the European Union,
+  highlighting trade trends, partner countries and growth dynamics over the years. 
+  The goal of the report is to understand the trade flows between EU and non-EU countries, 
+  and identify key trade indicators and insights.
+</p>
+
+<div class="project-block">
+
+    <h3>1. EU Trade Overview</h3>
+    <img class="proj-img" src="Assets/1.png" onclick="openModal(this.src)">
+    <p class="caption">
+      Summary of total trade volume, imports, exports and net positions.
     </p>
-  </div>
 
-  <!-- SCREENSHOTS -->
-  <div class="section">
-    <h2>📉 Dashboard Screenshots</h2>
+    <h3>2. Country Details</h3>
+    <img class="proj-img" src="Assets/2.png" onclick="openModal(this.src)">
+    <p class="caption">
+      Comparison of trade flows per country, including partner analysis.
+    </p>
 
-    <div class="screenshots">
-      <div>
-        <img src="Assets/1.png">
-        <p class="img-title">Main overview – Imports, Exports & Partners</p>
-      </div>
+    <h3>3. Flow Analysis</h3>
+    <img class="proj-img" src="Assets/3.png" onclick="openModal(this.src)">
+    <p class="caption">
+      Imports and exports split between Intra-EU and Extra-EU trade.
+    </p>
 
-      <div>
-        <img src="Assets/2.png">
-        <p class="img-title">Country Trade Details</p>
-      </div>
+    <h3>4. Trends</h3>
+    <img class="proj-img" src="Assets/4.png" onclick="openModal(this.src)">
+    <p class="caption">
+      Trade evolution over time and year-over-year growth trends.
+    </p>
 
-      <div>
-        <img src="Assets/3.png">
-        <p class="img-title">Trade Flow Analysis</p>
-      </div>
+    <h3>5. Strategic Insights</h3>
+    <img class="proj-img" src="Assets/5.png" onclick="openModal(this.src)">
+    <p class="caption">
+      Key observations and business insights based on trade performance.
+    </p>
+</div>
 
-      <div>
-        <img src="Assets/4.png">
-        <p class="img-title">Trends over time</p>
-      </div>
-
-      <div>
-        <img src="Assets/5.png">
-        <p class="img-title">Strategic Insights</p>
-      </div>
-    </div>
-  </div>
-
-  <!-- KEY FINDINGS -->
-  <div class="section">
-    <h2>📌 Key Insights</h2>
-    <ul>
-      <li>Total Trade Volume: €215bn</li>
-      <li>Total Imports: €107bn</li>
-      <li>Total Exports: €108bn</li>
-      <li>Top Trade Partner: Germany</li>
-      <li>Most active trade year: 2022</li>
-    </ul>
-    <p>Germany represents the largest share of total imports and exports.</p>
-  </div>
-
-  <!-- WHAT I LEARNED -->
-  <div class="section">
-    <h2>🎓 What I Learned</h2>
-
-    <ul>
-      <li>Data modeling and large dataset exploration</li>
-      <li>Visual storytelling & UX in dashboards</li>
-      <li>Trade flow analysis between regions</li>
-      <li>Building multi-page Power BI dashboards</li>
-      <li>Using data-driven business insights</li>
-    </ul>
-  </div>
+<div class="learn-box">
+  <h3>🧠 What I Learned</h3>
+  <ul>
+    <li>Enhanced Power BI storytelling and dashboard structure</li>
+    <li>Better metric definition, KPIs and strategic business insights</li>
+    <li>More advanced use of visuals, UX and interaction</li>
+    <li>Understanding trade patterns between EU and non-EU countries</li>
+    <li>This project shows a clear improvement from my first Power BI dashboard</li>
+  </ul>
+</div>
 
 </div>
+
+<div id="modal" onclick="closeModal()">
+  <img id="modalImg">
+</div>
+
+<script>
+function openModal(src){
+  modalImg.src=src;
+  modal.style.display="flex";
+}
+function closeModal(){
+  modal.style.display="none";
+}
+</script>
 
 </body>
 </html>
